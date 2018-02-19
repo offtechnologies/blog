@@ -1,7 +1,7 @@
 ---
 title: "Ubuntu and Suricata in IPS mode - 8 simple steps"
 date: 2018-02-19T12:42:11+01:00
-draft: true
+draft: false
 tags: [ "Ubuntu", "Security", "IPS", "Suricata" ]
 ---
 Suricata is a free and open source, mature, fast and robust network threat detection engine. <!--more-->
