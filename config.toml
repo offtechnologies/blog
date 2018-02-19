@@ -1,4 +1,4 @@
-baseURL = "https://offtechnologies.github.io"
+baseURL = ""
 languageCode = "en-us"
 title = "Cloudbusting"
 # theme = "hugo-theme-cactus-plus"
