@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="offtechnologies">
+		<meta name="description" content="Site Description">
+		<meta name="generator" content="Hugo 0.36.1" />
+		<title>Continuous Deployment - Using Travis-CI to Build GitHub Pages &middot; Cloudbusting</title>
+		<link rel="shortcut icon" href="https://offtechnologies.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://offtechnologies.github.io/css/style.css">
+		<link rel="stylesheet" href="https://offtechnologies.github.io/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://offtechnologies.github.io/css/font-awesome.min.css">
+		
+
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://offtechnologies.github.io/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://offtechnologies.github.io/posts'>Archive</a>
+	<a href='https://offtechnologies.github.io/tags'>Tags</a>
+	<a href='https://offtechnologies.github.io/about'>About</a>
+
+	
+
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Continuous Deployment - Using Travis-CI to Build GitHub Pages
+                    </h1>
+                    <h2 class="headline">
+                    Feb 20, 2018 10:24
+                    · 308 words
+                    · 2 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://offtechnologies.github.io/tags/travis-ci">Travis-CI</a>
+                          
+                              <a href="https://offtechnologies.github.io/tags/devops">DevOps</a>
+                          
+                              <a href="https://offtechnologies.github.io/tags/ci/cd">CI/CD</a>
+                          
+                              <a href="https://offtechnologies.github.io/tags/hugo">HUGO</a>
+                          
+                              <a href="https://offtechnologies.github.io/tags/deployment">Deployment</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>A static site generator (i.e HUGO) is a tool that renders content into html, css and javascript. The content is written in markdown (or html) and contains some metadata like dates, title or tags, categories, etc.</p>
+
+<p>In theory, the workflow to make a new post is quite simple, just throw in a new markdown file in the right place, rebuild your site, and deploy it to your server. But deploying the static site could be a hell. We can do better.</p>
+
+<p>We&rsquo;ll use Travis CI to build our site and deploy it afterwards to the master branch of our repository.
+To allow Travis CI access to our repository we need to <a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">create a personal access token</a>, which is used in the <a href="https://docs.travis-ci.com/user/environment-variables#Defining-Variables-in-Repository-Settings">repository settings</a>.</p>
+
+<p>The following travis.yml file works fine with Hugo.:</p>
+
+<pre><code>language: go
+
+# use the latest version of golang
+go:
+  - master
+
+# use the latest version of hugo
+install:
+  - go get github.com/spf13/hugo
+
+# build your website on travis
+script:
+  - hugo
+
+# deploy your static files to GitHub Pages after a successful build.
+deploy:
+  # set default static site output dir for hugo
+  local_dir: public
+  # set the slug of the repo you want to deploy your site to i.e.
+  repo: offtechnologies/offtechnologies.github.io
+  # github pages branch to deploy to
+  target_branch: master
+  provider: pages
+  skip-cleanup: true
+  # You will need to provide a personal access token
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
+
+</code></pre>
+
+<p>Commit and push our changes to GitHub:</p>
+
+<pre><code>git add .travis.yaml
+git commit -m &quot;add Travis CI config&quot;
+git push -u origin master
+</code></pre>
+
+<p>After a while Travis CI should recognise that there was a recent push to the repository and it should start to build your site with Hugo and deploy it afterwards. This should now happen each time you make changes to your repository at GitHub.</p>
+
+<p>Credits:</p>
+
+<ul>
+<li><a href="https://docs.travis-ci.com/user/deployment/pages/">Travis CI</a></li>
+<li><a href="http://schnuddelhuddel.de/deployment-of-a-hugo-site-on-github-pages/">Mario Martelli</a></li>
+<li><a href="https://www.martinkaptein.com/blog/hugo-with-travis-ci-on-gh-pages/">Martin Kaptein</a></li>
+</ul>
+
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://www.github.com/offtechnologies">
+        <i class="fa fa-github"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> offtechnologies
+    
+    </p>
+    
+</footer>
+
+        </section>
+
+        <script src="https://offtechnologies.github.io/js/jquery-3.3.1.min.js"></script>
+<script src="https://offtechnologies.github.io/js/main.js"></script>
+<script src="https://offtechnologies.github.io/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cloudbusting</title>
-    <link>https://offtechnologies.github.io/</link>
-    <description>Recent content on Cloudbusting</description>
+    <title>Hugo on Cloudbusting</title>
+    <link>https://offtechnologies.github.io/tags/hugo/</link>
+    <description>Recent content in Hugo on Cloudbusting</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 20 Feb 2018 10:24:14 +0100</lastBuildDate>
     
-	<atom:link href="https://offtechnologies.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://offtechnologies.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       <guid>https://offtechnologies.github.io/posts/travis/</guid>
       <description>A static site generator (i.e HUGO) is a tool that renders content into html, css and javascript. The content is written in markdown (or html) and contains some metadata like dates, title or tags, categories, etc.
 In theory, the workflow to make a new post is quite simple, just throw in a new markdown file in the right place, rebuild your site, and deploy it to your server. But deploying the static site could be a hell.</description>
-    </item>
-    
-    <item>
-      <title>Ubuntu and Suricata in IPS mode - 8 simple steps</title>
-      <link>https://offtechnologies.github.io/posts/suricata_ips/</link>
-      <pubDate>Mon, 19 Feb 2018 12:42:11 +0100</pubDate>
-      
-      <guid>https://offtechnologies.github.io/posts/suricata_ips/</guid>
-      <description>&lt;p&gt;Suricata is a free and open source, mature, fast and robust network threat detection engine. &lt;/p&gt;</description>
     </item>
     
   </channel>

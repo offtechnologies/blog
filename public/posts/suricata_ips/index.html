@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<meta name="author" content="offtechnologies">
+		<meta name="description" content="Site Description">
+		<meta name="generator" content="Hugo 0.36.1" />
+		<title>Ubuntu and Suricata in IPS mode - 8 simple steps &middot; Cloudbusting</title>
+		<link rel="shortcut icon" href="https://offtechnologies.github.io/images/favicon.ico">
+		<link rel="stylesheet" href="https://offtechnologies.github.io/css/style.css">
+		<link rel="stylesheet" href="https://offtechnologies.github.io/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://offtechnologies.github.io/css/font-awesome.min.css">
+		
+
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://offtechnologies.github.io/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://offtechnologies.github.io/posts'>Archive</a>
+	<a href='https://offtechnologies.github.io/tags'>Tags</a>
+	<a href='https://offtechnologies.github.io/about'>About</a>
+
+	
+
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        Ubuntu and Suricata in IPS mode - 8 simple steps
+                    </h1>
+                    <h2 class="headline">
+                    Feb 19, 2018 12:42
+                    · 174 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="https://offtechnologies.github.io/tags/ubuntu">Ubuntu</a>
+                          
+                              <a href="https://offtechnologies.github.io/tags/security">Security</a>
+                          
+                              <a href="https://offtechnologies.github.io/tags/ips">IPS</a>
+                          
+                              <a href="https://offtechnologies.github.io/tags/suricata">Suricata</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p>Suricata is a free and open source, mature, fast and robust network threat detection engine. </p>
+
+<p>The Suricata engine is capable of real time intrusion detection (IDS), inline intrusion prevention (IPS), network security monitoring (NSM) and offline pcap processing.</p>
+
+<p>Suricata inspects the network traffic using a powerful and extensive rules and signature language.</p>
+
+<h4 id="step-1-install-suricata">Step 1. Install Suricata</h4>
+
+<pre><code>sudo apt-get -y install suricata
+</code></pre>
+
+<h4 id="step-2-allow-suricata-file-logging">Step 2. Allow Suricata File Logging</h4>
+
+<pre><code>sudoedit /etc/suricata/suricata-debian.yaml
+</code></pre>
+
+<p>Edit:</p>
+
+<pre><code>outputs:
+ - console:
+   enabled: no
+ - file:
+   enabled: yes
+   filename: /var/log/suricata/suricata.log
+</code></pre>
+
+<h4 id="step-3-configure-daemon">Step 3. Configure Daemon</h4>
+
+<pre><code>sudoedit /etc/default/suricata
+</code></pre>
+
+<p>Edit:</p>
+
+<pre><code>RUN=yes
+</code></pre>
+
+<h4 id="step-4-download-latest-rules-with-oinkmaster">Step 4. Download Latest Rules with OinkMaster</h4>
+
+<pre><code>sudoedit /etc/oinkmaster.conf
+</code></pre>
+
+<p>Edit:</p>
+
+<pre><code>url=http://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz
+</code></pre>
+
+<p>Run:</p>
+
+<pre><code>sudo oinkmaster -o /etc/suricata/rules/
+</code></pre>
+
+<h4 id="step-5-add-nfqueue-rules-to-iptables-firewall">Step 5. Add NFQUEUE Rules to IpTables Firewall</h4>
+
+<pre><code>sudo iptables -I INPUT -j NFQUEUE
+sudo iptables -I OUTPUT -j NFQUEUE
+sudo netfilter-persistent save
+</code></pre>
+
+<h4 id="step-6-restart-suricata">Step 6. Restart Suricata</h4>
+
+<pre><code>sudo systemctl restart suricata
+</code></pre>
+
+<h4 id="step-7-add-oinkmaster-cronjob-to-automatically-download-rules-every-day-at-12">Step 7. Add Oinkmaster cronjob to automatically download rules - every day at 12</h4>
+
+<pre><code>sudo crontab -e
+</code></pre>
+
+<p>Edit:</p>
+
+<pre><code>0 12 * * * oinkmaster -C /etc/oinkmaster.conf -o /etc/suricata/rules
+</code></pre>
+
+<h4 id="step-8-test">Step 8. Test</h4>
+
+<pre><code>curl -A BlackSun google.com
+</code></pre>
+
+<pre><code>sudo tail /var/log/suricata/fast.log
+</code></pre>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="https://www.github.com/offtechnologies">
+        <i class="fa fa-github"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> offtechnologies
+    
+    </p>
+    
+</footer>
+
+        </section>
+
+        <script src="https://offtechnologies.github.io/js/jquery-3.3.1.min.js"></script>
+<script src="https://offtechnologies.github.io/js/main.js"></script>
+<script src="https://offtechnologies.github.io/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>

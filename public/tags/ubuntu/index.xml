@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu on Cloudbusting</title>
+    <link>https://offtechnologies.github.io/tags/ubuntu/</link>
+    <description>Recent content in Ubuntu on Cloudbusting</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 19 Feb 2018 12:42:11 +0100</lastBuildDate>
+    
+	<atom:link href="https://offtechnologies.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ubuntu and Suricata in IPS mode - 8 simple steps</title>
+      <link>https://offtechnologies.github.io/posts/suricata_ips/</link>
+      <pubDate>Mon, 19 Feb 2018 12:42:11 +0100</pubDate>
+      
+      <guid>https://offtechnologies.github.io/posts/suricata_ips/</guid>
+      <description>&lt;p&gt;Suricata is a free and open source, mature, fast and robust network threat detection engine. &lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
